@@ -13,14 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->bigInteger('user_id')->unsigned();
+            $table->string('plan');
+            $table->date('fechainicio');
+            $table->date('fechacaducidad');
             $table->timestamps();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('CASCADE');
         });
     }
 
@@ -31,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('subscription');
     }
 };

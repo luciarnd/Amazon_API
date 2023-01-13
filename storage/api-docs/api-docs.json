@@ -1,0 +1,69 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Amazon",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/productos": {
+            "get": {
+                "tags": [
+                    "Productos"
+                ],
+                "summary": "Get list of productos",
+                "description": "Returns list of productos",
+                "operationId": "496dc08306524d77f18d124d1d6838aa",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/api/producto/{id}": {
+            "get": {
+                "tags": [
+                    "Productos"
+                ],
+                "summary": "Get a producto",
+                "description": "Returns one producto",
+                "operationId": "af41299eb66ce2d7e6a7c81112895d23",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    }
+}

@@ -1,0 +1,41 @@
+nav {
+    background-color: #131921;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.titulo {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.nav-link:hover {
+    border-bottom: 2px solid white;
+    cursor: pointer;
+}
+
+.carrito:hover {
+    border: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.paises li:hover {
+    border-bottom: 1px solid white;
+    cursor: pointer;
+}
+
+.paises {
+    font-size: 15px;
+    word-spacing: 25px;
+}
+
+.paises li {
+    display: inline;
+    word-spacing: 2px;
+}
+
+.map-navegacion a:hover {
+    border-bottom: 1px solid white;
+    cursor: pointer;
+}
