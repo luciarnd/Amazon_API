@@ -16,6 +16,29 @@ class AuthController extends Controller
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
+    /**
+     * @OA\Post(
+     * path="/api/login",
+     * description="Login",
+     * tags={"Auth"},
+     * @OA\RequestBody(
+     *    required=true,
+     *    description="Pass login info",
+     *    @OA\JsonContent(
+     *       required={"email","password"},
+     *       @OA\Property(property="email", type="string", format="text", example=""),
+     *       @OA\Property(property="password", type="string", format="text", example=""),
+     *    ),
+     * ),
+     *     @OA\Response(
+     *    response=422,
+     *    description="Wrong response",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="message", type="string", example="Sorry, wrong data introduced")
+     *        )
+     *     )
+     * ),
+     */
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -44,6 +67,32 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * @OA\Post(
+     * path="/api/register",
+     * description="Register",
+     * tags={"Auth"},
+     * @OA\RequestBody(
+     *    required=true,
+     *    description="Pass register info",
+     *    @OA\JsonContent(
+     *       required={"email","password", "name", "apellido", "telefono"},
+     *       @OA\Property(property="email", type="string", format="text", example=""),
+     *       @OA\Property(property="password", type="string", format="text", example=""),
+     *         @OA\Property(property="name", type="string", format="text", example=""),
+     *       @OA\Property(property="apellido", type="string", format="text", example=""),
+     *      @OA\Property(property="telefono", type="string", format="text", example=""),
+     *    ),
+     * ),
+     *     @OA\Response(
+     *    response=422,
+     *    description="Wrong response",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="message", type="string", example="Sorry, wrong data introduced")
+     *        )
+     *     )
+     * ),
+     */
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -71,6 +120,27 @@ class AuthController extends Controller
         ]);
     }
 
+
+    /**
+     * @OA\Get(
+     *      path="/api/me",
+     *      tags={"Auth"},
+     *      summary="See you",
+     *      security={{"bearerAuth":{}}},
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
+     */
     public function me()
     {
         return response()->json(
@@ -78,6 +148,21 @@ class AuthController extends Controller
         );
     }
 
+    /**
+     * @OA\Post(
+     * path="/api/logout",
+     * description="Logout",
+     * tags={"Auth"},
+     * security={{"bearerAuth":{}}},
+     *     @OA\Response(
+     *    response=422,
+     *    description="Wrong response",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="message", type="string", example="Sorry, wrong data introduced")
+     *        )
+     *     )
+     * ),
+     */
     public function logout()
     {
         Auth::logout();
