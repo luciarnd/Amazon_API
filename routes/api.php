@@ -28,6 +28,7 @@ Route::controller(SubscriptionController::class)->group(function() {
 
 Route::controller(PedidosController::class)->group(function () {
     Route::get('misPedidos', 'index');
+    Route::get('pedidos', 'indexAll');
     Route::get('pedido/{id}', 'show');
     Route::post('pedido', 'store');
     Route::delete('pedido/{id}', 'destroy');

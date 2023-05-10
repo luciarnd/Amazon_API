@@ -36,13 +36,24 @@ class PedidosController extends Controller
      *     )
      */
     public function index(Request $request) {
-        $mispedidos = Pedido::all()->where('user_id', Auth::user()->id);
+        $id = Auth::user()->id;
+        $mispedidos = Pedido::where('user_id', '=', $id)->get();
         $misPedidosConProducto = [];
         foreach ($mispedidos as $pedido) {
             $productos = $pedido->productos;
             $misPedidosConProducto[] = $pedido;
         }
         return $misPedidosConProducto;
+    }
+
+    public function indexAll(Request $request) {
+        $pedidos = Pedido::all();
+        $pedidosConProducto = [];
+        foreach ($pedidos as $pedido) {
+            $productos = $pedido->productos;
+            $pedidosConProducto[] = $pedido;
+        }
+        return $pedidosConProducto;
     }
 
     /**
